@@ -89,11 +89,15 @@ export default function CombinedActivity() {
           totalCommits: 0, totalPrs: 0, totalIssues: 0,
           totalRepos: 0, totalStars: 0, totalForks: 0,
           languages: {}, monthlyCommits: [],
+          dailyCommits: [],
+          recentEvents: [],
         },
         gitee: gtData || {
           totalCommits: 0, totalPrs: 0, totalIssues: 0,
           totalRepos: 0, totalStars: 0, totalForks: 0,
           languages: {}, monthlyCommits: [],
+          dailyCommits: [],
+          recentEvents: [],
         },
         combined,
       })

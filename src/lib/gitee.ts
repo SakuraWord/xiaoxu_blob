@@ -118,7 +118,7 @@ export async function getActivityStats(username: string): Promise<ActivityStats>
       totalCommits,
       totalPrs: 0,
       totalIssues: repos.reduce((sum, r) => sum + r.open_issues_count, 0),
-      totalRepos: userData.public_repositories_count || userData.repositories_count,
+      totalRepos: repos.length,
       totalStars,
       totalForks,
       languages,
