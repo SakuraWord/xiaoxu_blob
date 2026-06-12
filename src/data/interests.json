@@ -1,0 +1,38 @@
+[
+  {
+    "name": "开源贡献",
+    "icon": "🌍",
+    "description": "积极参与开源项目，相信代码的力量可以改变世界",
+    "color": "#00ff88"
+  },
+  {
+    "name": "技术写作",
+    "icon": "✍️",
+    "description": "记录技术学习心得，分享踩坑经验和最佳实践",
+    "color": "#00d4ff"
+  },
+  {
+    "name": "AI / ML",
+    "icon": "🤖",
+    "description": "探索大语言模型应用，构建智能工具链",
+    "color": "#a78bfa"
+  },
+  {
+    "name": "终端美学",
+    "icon": "💻",
+    "description": "热爱命令行工具，追求极致的开发体验",
+    "color": "#f59e0b"
+  },
+  {
+    "name": "音乐",
+    "icon": "🎵",
+    "description": "代码与音乐是同一个东西——节奏与结构的艺术",
+    "color": "#ec4899"
+  },
+  {
+    "name": "摄影",
+    "icon": "📷",
+    "description": "用镜头捕捉光影，培养对构图与色彩的敏感度",
+    "color": "#14b8a6"
+  }
+]

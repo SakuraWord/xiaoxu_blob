@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "portfolio-site",
+    "title": "Personal Portfolio",
+    "description": "个人开发者官网，聚合 GitHub / Gitee 数据",
+    "longDescription": "一个极客风格个人官网，使用 Next.js + Tailwind CSS 构建，集成了 GitHub API 和 Gitee API，实时展示仓库数据、活跃度和项目信息。采用暗色主题和赛博朋克视觉风格。",
+    "techStack": ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    "stars": 12,
+    "forks": 3,
+    "githubUrl": "https://github.com/SakuraWord/portfolio-site",
+    "status": "active"
+  },
+  {
+    "slug": "cli-toolkit",
+    "title": "CLI Toolkit",
+    "description": "轻量级命令行工具集，提升开发效率",
+    "longDescription": "一套用 Go 编写的命令行工具集，包含项目脚手架、代码生成器、自动化部署等实用工具。支持插件系统，可根据个人需求扩展。",
+    "techStack": ["Go", "Cobra", "CLI"],
+    "stars": 45,
+    "forks": 8,
+    "githubUrl": "https://github.com/SakuraWord/cli-toolkit",
+    "status": "active"
+  },
+  {
+    "slug": "note-system",
+    "title": "Note System",
+    "description": "Markdown 笔记系统，支持标签与搜索",
+    "longDescription": "一个基于 Markdown 的笔记管理系统，支持标签分类、全文搜索、暗色模式。数据存储在本地 JSON 文件中，适合个人知识管理使用。",
+    "techStack": ["React", "TypeScript", "Markdown"],
+    "stars": 28,
+    "forks": 6,
+    "githubUrl": "https://github.com/SakuraWord/note-system",
+    "demoUrl": "https://note-demo.example.com",
+    "status": "active"
+  },
+  {
+    "slug": "api-gateway",
+    "title": "API Gateway",
+    "description": "微服务 API 网关，支持鉴权限流",
+    "longDescription": "面向微服务架构的 API 网关实现，支持 JWT 鉴权、请求限流、熔断降级、日志聚合等功能。基于 Go 和 etcd 构建。",
+    "techStack": ["Go", "etcd", "gRPC"],
+    "stars": 67,
+    "forks": 15,
+    "githubUrl": "https://github.com/SakuraWord/api-gateway",
+    "status": "active"
+  },
+  {
+    "slug": "blog-starter",
+    "title": "Blog Starter",
+    "description": "极客风格博客模板，内置 SEO 优化",
+    "longDescription": "一个面向开发者的博客 Starter 模板，内置 SEO 优化、暗色模式、RSS 订阅、评论系统。支持 Markdown 写作，自动部署到 Vercel。",
+    "techStack": ["Next.js", "MDX", "Vercel"],
+    "stars": 33,
+    "forks": 9,
+    "githubUrl": "https://github.com/SakuraWord/blog-starter",
+    "status": "developing"
+  }
+]

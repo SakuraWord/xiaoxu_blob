@@ -1,0 +1,74 @@
+[
+  {
+    "name": "JavaScript / TypeScript",
+    "level": 92,
+    "category": "语言",
+    "icon": "JS"
+  },
+  {
+    "name": "Python",
+    "level": 85,
+    "category": "语言",
+    "icon": "PY"
+  },
+  {
+    "name": "Go",
+    "level": 70,
+    "category": "语言",
+    "icon": "GO"
+  },
+  {
+    "name": "React / Next.js",
+    "level": 90,
+    "category": "前端",
+    "icon": "⚛️"
+  },
+  {
+    "name": "Vue.js",
+    "level": 80,
+    "category": "前端",
+    "icon": "💚"
+  },
+  {
+    "name": "Tailwind CSS",
+    "level": 88,
+    "category": "前端",
+    "icon": "🎨"
+  },
+  {
+    "name": "Node.js / Express",
+    "level": 85,
+    "category": "后端",
+    "icon": "🟢"
+  },
+  {
+    "name": "Django / FastAPI",
+    "level": 78,
+    "category": "后端",
+    "icon": "🐍"
+  },
+  {
+    "name": "PostgreSQL / Redis",
+    "level": 75,
+    "category": "数据库",
+    "icon": "🗄️"
+  },
+  {
+    "name": "Docker / Kubernetes",
+    "level": 72,
+    "category": "DevOps",
+    "icon": "🐳"
+  },
+  {
+    "name": "CI/CD (GitHub Actions)",
+    "level": 76,
+    "category": "DevOps",
+    "icon": "🔄"
+  },
+  {
+    "name": "Linux / Shell",
+    "level": 80,
+    "category": "DevOps",
+    "icon": "🐧"
+  }
+]
