@@ -1,114 +1,13 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import type { Repo } from '@/types'
 import Card from '@/components/ui/card'
 import Badge from '@/components/ui/badge'
 
-// 模拟数据（API 集成后替换）
-const mockRepos = {
-  github: [
-    {
-      name: 'portfolio-site',
-      fullName: 'SakuraWord/portfolio-site',
-      description: '个人开发者官网，聚合 GitHub / Gitee 数据',
-      language: 'TypeScript',
-      stars: 12,
-      forks: 3,
-      openIssues: 2,
-      updatedAt: '2026-06-10T08:00:00Z',
-      url: 'https://github.com/SakuraWord/portfolio-site',
-      isFork: false,
-      topics: ['nextjs', 'portfolio', 'typescript'],
-      license: 'MIT',
-    },
-    {
-      name: 'cli-toolkit',
-      fullName: 'SakuraWord/cli-toolkit',
-      description: '轻量级命令行工具集，提升开发效率',
-      language: 'Go',
-      stars: 45,
-      forks: 8,
-      openIssues: 5,
-      updatedAt: '2026-06-08T12:00:00Z',
-      url: 'https://github.com/SakuraWord/cli-toolkit',
-      isFork: false,
-      topics: ['cli', 'go', 'tools'],
-      license: 'MIT',
-    },
-    {
-      name: 'api-gateway',
-      fullName: 'SakuraWord/api-gateway',
-      description: '微服务 API 网关，支持鉴权限流',
-      language: 'Go',
-      stars: 67,
-      forks: 15,
-      openIssues: 8,
-      updatedAt: '2026-06-05T10:00:00Z',
-      url: 'https://github.com/SakuraWord/api-gateway',
-      isFork: false,
-      topics: ['microservices', 'gateway', 'go'],
-      license: 'Apache-2.0',
-    },
-    {
-      name: 'note-system',
-      fullName: 'SakuraWord/note-system',
-      description: 'Markdown 笔记系统，支持标签与搜索',
-      language: 'TypeScript',
-      stars: 28,
-      forks: 6,
-      openIssues: 3,
-      updatedAt: '2026-06-01T14:00:00Z',
-      url: 'https://github.com/SakuraWord/note-system',
-      isFork: false,
-      topics: ['markdown', 'notes', 'react'],
-      license: 'MIT',
-    },
-    {
-      name: 'blog-starter',
-      fullName: 'SakuraWord/blog-starter',
-      description: '极客风格博客模板，内置 SEO 优化',
-      language: 'TypeScript',
-      stars: 33,
-      forks: 9,
-      openIssues: 4,
-      updatedAt: '2026-05-28T16:00:00Z',
-      url: 'https://github.com/SakuraWord/blog-starter',
-      isFork: false,
-      topics: ['nextjs', 'blog', 'seo'],
-      license: 'MIT',
-    },
-  ] as Repo[],
-  gitee: [
-    {
-      name: 'yingnuo-docs',
-      fullName: 'yingnuo/yingnuo-docs',
-      description: '英诺项目技术文档',
-      language: 'Markdown',
-      stars: 5,
-      forks: 1,
-      openIssues: 0,
-      updatedAt: '2026-06-11T09:00:00Z',
-      url: 'https://gitee.com/yingnuo/yingnuo-docs',
-      isFork: false,
-      topics: ['docs', 'markdown'],
-    },
-    {
-      name: 'web-dashboard',
-      fullName: 'yingnuo/web-dashboard',
-      description: '数据可视化仪表盘前端',
-      language: 'JavaScript',
-      stars: 8,
-      forks: 2,
-      openIssues: 1,
-      updatedAt: '2026-06-09T11:00:00Z',
-      url: 'https://gitee.com/yingnuo/web-dashboard',
-      isFork: false,
-      topics: ['vue', 'echarts'],
-    },
-  ] as Repo[],
-}
+const GITHUB_USER = 'SakuraWord'
+const GITEE_USER = 'yingnuo'
 
 const languageColors: Record<string, string> = {
   TypeScript: '#3178c6',
@@ -119,6 +18,9 @@ const languageColors: Record<string, string> = {
   Vue: '#41b883',
   CSS: '#563d7c',
   HTML: '#e34c26',
+  NodeJS: '#339933',
+  Shell: '#89e051',
+  Jupyter: '#DA5B0B',
 }
 
 type SortKey = 'stars' | 'updatedAt'
@@ -127,8 +29,24 @@ export default function Repos() {
   const [platform, setPlatform] = useState<'github' | 'gitee'>('github')
   const [sortKey, setSortKey] = useState<SortKey>('stars')
   const [languageFilter, setLanguageFilter] = useState<string | null>(null)
+  const [repos, setRepos] = useState<Repo[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const repos = useMemo(() => mockRepos[platform], [platform])
+  useEffect(() => {
+    const user = platform === 'github' ? GITHUB_USER : GITEE_USER
+    setLoading(true)
+
+    fetch(`/api/repos?platform=${platform}&user=${user}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setRepos(Array.isArray(data) ? data : [])
+      })
+      .catch((err) => {
+        console.error(`Failed to fetch ${platform} repos:`, err)
+        setRepos([])
+      })
+      .finally(() => setLoading(false))
+  }, [platform])
 
   // 收集所有语言
   const allLanguages = useMemo(() => {
@@ -146,6 +64,11 @@ export default function Repos() {
     })
     return result
   }, [repos, languageFilter, sortKey])
+
+  const user = platform === 'github' ? GITHUB_USER : GITEE_USER
+  const repoUrl = platform === 'github'
+    ? `https://github.com/${user}`
+    : `https://gitee.com/${user}`
 
   return (
     <section id="repos" className="py-24 px-4 bg-white/[0.01]">
@@ -237,81 +160,94 @@ export default function Repos() {
         )}
 
         {/* 仓库列表 */}
-        <div className="space-y-3">
-          {filtered.map((repo: Repo, i: number) => (
-            <motion.div
-              key={repo.fullName}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
-              <Link href={repo.url} target="_blank" rel="noopener noreferrer">
-                <Card className="cursor-pointer transition-all duration-300 hover:-translate-y-0.5" glowColor="cyan">
-                  <div className="flex items-start gap-3">
-                    {/* 语言圆点 */}
-                    {repo.language && (
-                      <span
-                        className="mt-2 w-3 h-3 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: languageColors[repo.language] || '#888' }}
-                        title={repo.language}
-                      />
-                    )}
-
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-mono text-sm font-semibold text-white">
-                          {repo.name}
-                        </h3>
-                        {repo.isFork && <Badge variant="gray" size="sm">Fork</Badge>}
-                        {repo.license && <Badge variant="gray" size="sm">{repo.license}</Badge>}
-                      </div>
-
-                      <p className="text-sm text-gray-400 mt-1 line-clamp-1">
-                        {repo.description}
-                      </p>
-
-                      {/* 标签 */}
-                      {repo.topics.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 mt-2">
-                          {repo.topics.slice(0, 4).map((topic) => (
-                            <span
-                              key={topic}
-                              className="text-xs font-mono px-2 py-0.5 bg-[#00d4ff]/10 text-[#00d4ff]/80 rounded-full"
-                            >
-                              {topic}
-                            </span>
-                          ))}
-                        </div>
+        {loading ? (
+          <div className="text-center py-10 text-gray-500 font-mono">
+            Loading repositories...
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="text-center py-10 text-gray-500 font-mono">
+            No repositories found.
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {filtered.map((repo, i: number) => (
+              <motion.div
+                key={repo.fullName}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05, duration: 0.4 }}
+              >
+                <a
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Card
+                    className="cursor-pointer transition-all duration-300 hover:-translate-y-0.5"
+                    glowColor="cyan"
+                  >
+                    <div className="flex items-start gap-3">
+                      {/* 语言圆点 */}
+                      {repo.language && (
+                        <span
+                          className="mt-2 w-3 h-3 rounded-full flex-shrink-0"
+                          style={{ backgroundColor: languageColors[repo.language] || '#888' }}
+                          title={repo.language}
+                        />
                       )}
 
-                      {/* 统计数据 */}
-                      <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 font-mono">
-                        <span className="flex items-center gap-1">
-                          <span className="text-[#00ff88]">★</span> {repo.stars}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-[#00d4ff]">↯</span> {repo.forks}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <span className="text-red-400">●</span> {repo.openIssues}
-                        </span>
-                        <span className="ml-auto text-gray-600">
-                          {new Date(repo.updatedAt).toLocaleDateString('zh-CN')}
-                        </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <h3 className="font-mono text-sm font-semibold text-white">
+                            {repo.name}
+                          </h3>
+                          {repo.isFork && <Badge variant="gray" size="sm">Fork</Badge>}
+                          {repo.license && <Badge variant="gray" size="sm">{repo.license}</Badge>}
+                        </div>
+
+                        <p className="text-sm text-gray-400 mt-1 line-clamp-1">
+                          {repo.description}
+                        </p>
+
+                        {/* 标签 */}
+                        {repo.topics.length > 0 && (
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {repo.topics.slice(0, 4).map((topic) => (
+                              <span
+                                key={topic}
+                                className="text-xs font-mono px-2 py-0.5 bg-[#00d4ff]/10 text-[#00d4ff]/80 rounded-full"
+                              >
+                                {topic}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+
+                        {/* 统计数据 */}
+                        <div className="flex items-center gap-4 mt-3 text-xs text-gray-500 font-mono">
+                          <span className="flex items-center gap-1">
+                            <span className="text-[#00ff88]">★</span> {repo.stars}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <span className="text-[#00d4ff]">↯</span> {repo.forks}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <span className="text-red-400">●</span> {repo.openIssues}
+                          </span>
+                          <span className="ml-auto text-gray-600">
+                            {new Date(repo.updatedAt).toLocaleDateString('zh-CN')}
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
+                  </Card>
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
-}
-
-function Link({ href, target, rel, children }: { href: string; target?: string; rel?: string; children: React.ReactNode }) {
-  return <a href={href} target={target} rel={rel}>{children}</a>
 }

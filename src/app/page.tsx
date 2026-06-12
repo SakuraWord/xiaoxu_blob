@@ -4,7 +4,7 @@ import Skills from '@/components/skills'
 import Interests from '@/components/interests'
 import Projects from '@/components/projects'
 import Repos from '@/components/repos'
-import Activity from '@/components/activity'
+import CombinedActivity from '@/components/combined-activity'
 import Footer from '@/components/footer'
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <Interests />
       <Projects />
       <Repos />
-      <Activity />
+      <CombinedActivity />
       <Footer />
     </main>
   )

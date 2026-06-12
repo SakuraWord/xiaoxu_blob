@@ -54,6 +54,17 @@ export interface ActivityStats {
   totalForks: number;
   languages: Record<string, number>;
   monthlyCommits: Array<{ month: string; count: number }>;
+  dailyCommits?: Array<{ date: string; count: number }>;
+  recentEvents?: ActivityEvent[];
+}
+
+export interface ActivityEvent {
+  action: string;
+  repo: string;
+  message?: string;
+  time: string;
+  color: string;
+  url?: string;
 }
 
 export interface ContactLink {
