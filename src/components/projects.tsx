@@ -6,7 +6,7 @@ import projectsData from '@/data/projects.json'
 import type { Project } from '@/types'
 import Card from '@/components/ui/card'
 import Badge from '@/components/ui/badge'
-import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 const statusMap = {
   active: { label: 'Active', variant: 'green' as const },
@@ -15,6 +15,7 @@ const statusMap = {
 }
 
 export default function Projects() {
+  const router = useRouter()
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null)
 
   return (
@@ -48,7 +49,10 @@ export default function Projects() {
               onMouseEnter={() => setHoveredSlug(p.slug)}
               onMouseLeave={() => setHoveredSlug(null)}
             >
-              <Link href={`/projects/${p.slug}`}>
+              <div
+                className="cursor-pointer"
+                onClick={() => router.push(`/projects/${p.slug}`)}
+              >
                 <Card
                   glowColor={i % 2 === 0 ? 'green' : 'cyan'}
                   className="h-full cursor-pointer transition-transform duration-300 hover:-translate-y-1"
@@ -140,7 +144,7 @@ export default function Projects() {
                     )}
                   </AnimatePresence>
                 </Card>
-              </Link>
+              </div>
             </motion.div>
             )
           })}
