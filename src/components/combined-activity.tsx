@@ -17,10 +17,10 @@ interface CombinedStats {
 
 // --- 统计卡片定义 ---
 const statCardDefs = [
-  { label: 'Total Commits', key: 'commits', icon: '⚡', color: '#00ff88' },
-  { label: 'Total PRs', key: 'prs', icon: '🔀', color: '#00d4ff' },
-  { label: 'Total Repos', key: 'repos', icon: '📦', color: '#a78bfa' },
-  { label: 'Total Stars', key: 'stars', icon: '⭐', color: '#f59e0b' },
+  { label: 'Total Commits', key: 'totalCommits' as const, icon: '⚡', color: '#00ff88' },
+  { label: 'Total PRs', key: 'totalPrs' as const, icon: '🔀', color: '#00d4ff' },
+  { label: 'Total Repos', key: 'totalRepos' as const, icon: '📦', color: '#a78bfa' },
+  { label: 'Total Stars', key: 'totalStars' as const, icon: '⭐', color: '#f59e0b' },
 ]
 
 export default function CombinedActivity() {
@@ -194,7 +194,7 @@ export default function CombinedActivity() {
         {/* 统计卡片 */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {statCardDefs.map((stat, i) => {
-            const value = c[stat.key as keyof ActivityStats] as number
+            const value = c[stat.key] ?? 0
             return (
               <motion.div
                 key={stat.label}
