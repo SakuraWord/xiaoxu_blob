@@ -63,7 +63,7 @@ export async function getRepos(username: string): Promise<Repo[]> {
       url: repo.html_url,
       isFork: repo.fork,
       homepage: repo.homepage ?? undefined,
-      topics: repo.topics,
+      topics: repo.topics ?? [],
       license: repo.license ?? undefined,
     }))
   } catch (error) {
