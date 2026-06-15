@@ -10,7 +10,9 @@
       "Bash(curl -s \"https://gitee.com/api/v5/users/yingnuo/repos?per_page=100\")",
       "Bash(python3 -c ' *)",
       "Bash(curl -s \"http://localhost:3001/api/activity?platform=github&user=SakuraWord\")",
-      "Bash(curl -s \"http://localhost:3001/api/activity?platform=gitee&user=yingnuo\")"
+      "Bash(curl -s \"http://localhost:3001/api/activity?platform=gitee&user=yingnuo\")",
+      "Bash(pnpm add *)",
+      "Bash(pnpm test *)"
     ]
   }
 }
