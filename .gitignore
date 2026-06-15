@@ -20,3 +20,9 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Local Claude settings (machine-specific)
+.claude/settings.local.json
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
