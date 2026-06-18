@@ -14,5 +14,9 @@
       "Bash(pnpm add *)",
       "Bash(pnpm test *)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "context7",
+    "playwright"
+  ]
 }
