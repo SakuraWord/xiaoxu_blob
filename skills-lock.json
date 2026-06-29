@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "targets": [
+    "claude"
+  ],
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "4eabc66183767153e404b39d1b839b1c37f2d82d86f0a0d7e880a579d8d62336"
+    },
+    "mcp-builder": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "09dbc5304106f99933581f90b5181657a3f1981c7adddf1880fb8eaf2e357378"
+    },
+    "react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "74f142d28d360d78e8bac4f239a84c87f0ced9015729bc72b5458d82ff45b015"
+    }
+  }
+}
